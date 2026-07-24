@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+body { font-family: 'Inter', sans-serif; }
+  .font-display { font-family: 'Fraunces', serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  .paper-texture {
+    background-image: radial-gradient(circle at 1px 1px, rgba(27,42,74,0.035) 1px, transparent 0);
+    background-size: 18px 18px;
+  }
+  .stamp {
+    transform: rotate(-4deg);
+  }
+  .receipt-row:not(:last-child) {
+    border-bottom: 1px dashed #D8D2C4;
+  }
