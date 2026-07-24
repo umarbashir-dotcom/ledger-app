@@ -80,15 +80,15 @@ const registerUser = async (req, res, next) => {
 // @route   POST /api/v1/users/login
 // @acess   Public
 const loginUser = async (req, res, next) => {
-    const { username, password } = req.body
+    const { email, password } = req.body
 
-    if (!username || !password) {
+    if (!email || !password) {
         res.status(400) // bad request
         throw new Error("Please add all fields")
     }
 
     // Check if user exists
-    const user = await User.findOne({ username })
+    const user = await User.findOne({ email })
     if (user && await bcrypt.compare(password, user.password)) {
         res.status(200).json({
             user: {
