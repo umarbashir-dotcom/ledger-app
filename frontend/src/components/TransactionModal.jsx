@@ -9,7 +9,7 @@ const TransactionModal = ({setIsModalOpen}) => {
     const [ formData, setFormData ] = useState({
         description: "",
         amount: "",
-        type: "",
+        type: "expense",
         category: "Groceries",
         date: new Date().toISOString().split('T')[0],
     })
