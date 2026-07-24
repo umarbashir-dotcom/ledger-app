@@ -18,6 +18,7 @@ const getBudgets = async (req, res) => {
             data: budgets,
         })
     } catch (error) {
+        console.log(error)
         res.status(500)
         throw new Error("Internal server Error")
     }
@@ -41,7 +42,7 @@ const updateBudget = async (req, res) => {
         res.status(401)
         throw new Error("Unauthorized user")
     }
-    console.log(req.body)
+    
     const budgets = req.body
 
 
