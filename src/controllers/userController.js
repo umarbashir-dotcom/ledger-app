@@ -19,11 +19,11 @@ const registerUser = async (req, res, next) => {
     let userExists = await User.findOne({ email })
 
     // by username
-    userExists = await User.findOne({ username })
+    // userExists = await User.findOne({ username })
 
     if (userExists) {
         res.status(400) // bad request
-        throw new Error("User already exists")
+        throw new Error("User with this email already exists")
     }
 
     // hash password

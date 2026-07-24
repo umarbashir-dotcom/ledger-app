@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false)
 
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   })
 
@@ -102,12 +102,12 @@ const LoginPage = () => {
           <form className="mt-6 space-y-4" onSubmit={onSubmit}>
 
             <div>
-              <label className="text-xs font-medium text-[#8A8371] uppercase tracking-wide">Username</label>
+              <label className="text-xs font-medium text-[#8A8371] uppercase tracking-wide">Email</label>
               <input
-                type="text"
-                name="username"
-                placeholder="umar"
-                value={formData.username}
+                type="email"
+                name="email"
+                placeholder="umar@gmail.com"
+                value={formData.email}
                 onChange={handleChange}
                 className="w-full mt-1.5 px-3.5 py-2.5 text-sm rounded-md border border-[#E5E0D5] bg-white focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/20 focus:border-[#1B2A4A] placeholder:text-[#B5AD9A]"
               />
