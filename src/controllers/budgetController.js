@@ -55,6 +55,7 @@ const updateBudget = async (req, res) => {
                     update: {
                         $set: {
                             category: budget.category,
+                            type: budget.type,
                             limit: budget.limit
                         }
                     }
@@ -81,4 +82,69 @@ const updateBudget = async (req, res) => {
     }
 }
 
-export { getBudgets, updateBudget }
+// insert default categories
+const insertDefaultCategories = async (user) => {
+        await Budget.insertMany([
+            {
+                userId: user._id,
+                category: "Groceries",
+                type: "expense",
+                limit: 1000
+            },
+            {
+                userId: user._id,
+                category: "Dining Out",
+                type: "expense",
+                limit: 800
+            },
+            {
+                userId: user._id,
+                category: "Transport",
+                type: "expense",
+                limit: 500
+            },
+            {
+                userId: user._id,
+                category: "Subscriptions",
+                type: "expense",
+                limit: 500
+            },
+            {
+                userId: user._id,
+                category: "Shopping",
+                type: "expense",
+                limit: 500
+            },
+            {
+                userId: user._id,
+                category: "Healthcare",
+                type: "expense",
+                limit: 500
+            },
+            {
+                userId: user._id,
+                category: "Utilities",
+                type: "expense",
+                limit: 500
+            },
+            {
+                userId: user._id,
+                category: "Entertainment",
+                type: "expense",
+                limit: 500
+            },
+            {
+                userId: user._id,
+                category: "Education",
+                type: "expense",
+                limit: 500
+            },
+            {
+                userId: user._id,
+                category: "Other",
+                type: "expense",
+                limit: 500
+            }
+        ]);
+}
+export { getBudgets, updateBudget, insertDefaultCategories }

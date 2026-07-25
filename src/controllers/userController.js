@@ -1,5 +1,5 @@
 import User from "../models/UserModal.js";
-import Budget from "../models/BudgetModal.js";
+import { insertDefaultCategories} from "./budgetController.js"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs";
 
@@ -38,28 +38,9 @@ const registerUser = async (req, res, next) => {
     })
 
     if (user) {
-        await Budget.insertMany([
-            {
-                userId: user._id,
-                category: "Groceries",
-                limit: 1000
-            },
-            {
-                userId: user._id,
-                category: "Dining Out",
-                limit: 800
-            },
-            {
-                userId: user._id,
-                category: "Transport",
-                limit: 500
-            },
-            {
-                userId: user._id,
-                category: "Subscriptions",
-                limit: 500
-            }
-        ]);
+        // insert default budget categories on registration
+        await insertDefaultCategories(user);
+
         res.status(201).json({
             user: {
                 id: user.id,

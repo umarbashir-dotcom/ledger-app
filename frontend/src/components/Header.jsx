@@ -2,6 +2,7 @@ import { useState, useContext } from "react"
 import TransactionModal from "./TransactionModal"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
+import favicon from "../../public/favicon.svg"
 
 const Header = () => {
 
@@ -21,7 +22,8 @@ const Header = () => {
                 <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-md bg-[#1B2A4A] flex items-center justify-center">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="#FAF7F0" strokeWidth="1.5" /><path d="M8 9h8M8 13h8M8 17h5" stroke="#FAF7F0" strokeWidth="1.5" strokeLinecap="round" /></svg>
+                            {/* <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="#FAF7F0" strokeWidth="1.5" /><path d="M8 9h8M8 13h8M8 17h5" stroke="#FAF7F0" strokeWidth="1.5" strokeLinecap="round" /></svg> */}
+                            <img src={favicon} alt="" />
                         </div>
                         <div>
                             <h1 className="font-display text-xl font-semibold tracking-tight leading-none">Ledger</h1>

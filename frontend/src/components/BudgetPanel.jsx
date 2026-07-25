@@ -5,18 +5,12 @@ import { GlobalContext } from '../context/GlobalState'
 
 const BudgetPanel = () => {
     const { transactions, budgets, fetchBudgets } = useContext(GlobalContext)
-    console.log(budgets)
     const [showModal, setShowModal] = useState(false)
-    console.log(budgets)
+    const expenseBudgets = budgets.filter(budget => budget.type === "expense")
+
     useEffect(()=> {
         fetchBudgets()
     }, [])
-    // const [budgets, setBudgets ] = useState([
-    //     {category: "Groceries", budgetLimit: 500},
-    //     {category: "Dining Out", budgetLimit: 7000},
-    //     {category: "Transport", budgetLimit: 600},
-    //     {category: "Subscriptions", budgetLimit: 1000},
-    // ])
 
     // it there is not transactions yet
     if(transactions.length === 0){
@@ -31,8 +25,7 @@ const BudgetPanel = () => {
             <h2 className="font-display text-base font-semibold mb-4">Monthly budgets</h2>
 
             <div className="space-y-4">
-                { budgets.map(budget =>{
-                    console.log(budget)
+                { expenseBudgets.map(budget =>{
                     const amount = transactions
                                     .filter(t => t.category === budget.category && t.type === "expense")
                                     .reduce((acc, t) => acc + t.amount, 0)

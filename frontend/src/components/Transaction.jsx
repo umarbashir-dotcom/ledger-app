@@ -1,16 +1,50 @@
-import { ShoppingCart, Home, Bus, Tv, UtensilsCrossed, Wallet, Briefcase } from 'lucide-react';
+import {
+    ShoppingCart,
+    Home,
+    Bus,
+    Tv,
+    UtensilsCrossed,
+    Plug,
+    Wallet,
+    Briefcase,
+    HeartPulse,
+    Film,
+    GraduationCap,
+    ShoppingBag,
+    DollarSign,
+    Building2,
+    TrendingUp,
+    Gift,
+    BadgeDollarSign,
+    RotateCcw
+} from 'lucide-react';
 import { toast } from 'react-toastify';
 import formatTransactionDate from '../utils/format';
 import { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 
 const categoryIcons = {
+    // Expense Categories
     Groceries: ShoppingCart,
     Rent: Home,
+    "Dining Out": UtensilsCrossed,
     Transport: Bus,
     Subscriptions: Tv,
-    'Dining Out': UtensilsCrossed,
-    Freelance: Briefcase,
+    Utilities: Plug,
+    Healthcare: HeartPulse,
+    Entertainment: Film,
+    Education: GraduationCap,
+    Shopping: ShoppingBag,
+    Other: Wallet,
+
+    // Income Categories
+    Salary: DollarSign,
+    Freelancing: Briefcase,
+    Business: Building2,
+    Investment: TrendingUp,
+    Gift: Gift,
+    Bonus: BadgeDollarSign,
+    Refund: RotateCcw,
 };
 
 

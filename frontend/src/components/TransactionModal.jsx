@@ -1,24 +1,49 @@
-import {GlobalContext} from "../context/GlobalState"
-import { useState, useContext, useEffect} from "react"
+import { GlobalContext } from "../context/GlobalState"
+import { useState, useContext, useEffect } from "react"
 import { toast } from 'react-toastify'
 
-const TransactionModal = ({setIsModalOpen}) => {
-    const { addTransaction} = useContext(GlobalContext)
+const TransactionModal = ({ setIsModalOpen }) => {
+    const { addTransaction } = useContext(GlobalContext)
 
+    const expenseCategories = [
+        "Groceries",
+        "Rent",
+        "Dining Out",
+        "Transport",
+        "Subscriptions",
+        "Utilities",
+        "Healthcare",
+        "Entertainment",
+        "Education",
+        "Shopping",
+        "Other"
+    ];
 
-    const [ formData, setFormData ] = useState({
+    const incomeCategories = [
+        "Salary",
+        "Freelancing",
+        "Business",
+        "Investment",
+        "Gift",
+        "Bonus",
+        "Refund",
+        "Other"
+    ];
+
+    const [formData, setFormData] = useState({
         description: "",
         amount: "",
         type: "expense",
         category: "Groceries",
         date: new Date().toISOString().split('T')[0],
     })
-    
+
+    const categories = formData.type  === "expense" ? expenseCategories : incomeCategories
 
     // handling input change
     const handleChange = (e) => {
         setFormData(prevState => {
-            return {...prevState, [e.target.name]: e.target.value}
+            return { ...prevState, [e.target.name]: e.target.value }
         })
     }
 
@@ -29,10 +54,10 @@ const TransactionModal = ({setIsModalOpen}) => {
 
     // submitting form
     const onSave = async () => {
-        try{
+        try {
             await addTransaction(formData)
             toast.success(`"${formData.description}" Added Successfully`)
-        } catch (err){
+        } catch (err) {
             console.log(err)
             toast.error(err.message)
         } finally {
@@ -51,37 +76,41 @@ const TransactionModal = ({setIsModalOpen}) => {
 
                 <div className="flex gap-2 mb-4">
                     <button onClick={() => setFormData(prev => {
-                        return {...prev, type: "expense"}
+                        return { ...prev, type: "expense", category: expenseCategories[0]}
                     })} className={formData.type === 'expense' ? 'bg-[#1B2A4A] text-[#FAF7F0]' : 'border border-[#E5E0D5]'}>Expense</button>
                     <button className={formData.type === 'income' ? 'bg-[#1B2A4A] text-[#FAF7F0]' : 'border border-[#E5E0D5]'} onClick={() => setFormData(prev => {
-                        return {...prev, type: "income"}
+                        return { ...prev, type: "income", category: incomeCategories[0] }
                     })}>Income</button>
                 </div>
 
                 <div className="space-y-3">
                     <div>
                         <label className="text-xs font-medium text-[#8A8371] uppercase tracking-wide">Description</label>
-                        <input type="text" placeholder="e.g. Whole Foods Market" className="w-full mt-1 px-3 py-2 text-sm rounded-md border border-[#E5E0D5] bg-white focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/20" name="description" value={formData.description} onChange={handleChange}/>
+                        <input type="text" placeholder="e.g. Whole Foods Market" className="w-full mt-1 px-3 py-2 text-sm rounded-md border border-[#E5E0D5] bg-white focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/20" name="description" value={formData.description} onChange={handleChange} />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                         <div>
                             <label className="text-xs font-medium text-[#8A8371] uppercase tracking-wide">Amount</label>
-                            <input type="number" placeholder="0.00" className="w-full mt-1 px-3 py-2 text-sm font-mono rounded-md border border-[#E5E0D5] bg-white focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/20" name="amount" value={formData.amount} onChange={handleChange}/>
+                            <input type="number" placeholder="0.00" className="w-full mt-1 px-3 py-2 text-sm font-mono rounded-md border border-[#E5E0D5] bg-white focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/20" name="amount" value={formData.amount} onChange={handleChange} />
                         </div>
                         <div>
                             <label className="text-xs font-medium text-[#8A8371] uppercase tracking-wide">Date</label>
-                            <input type="date" className="w-full mt-1 px-3 py-2 text-sm rounded-md border border-[#E5E0D5] bg-white focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/20" name="date" value={formData.date} onChange={handleChange}/>
+                            <input type="date" className="w-full mt-1 px-3 py-2 text-sm rounded-md border border-[#E5E0D5] bg-white focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/20" name="date" value={formData.date} onChange={handleChange} />
                         </div>
                     </div>
                     <div>
                         <label className="text-xs font-medium text-[#8A8371] uppercase tracking-wide">Category</label>
+
                         <select className="w-full mt-1 px-3 py-2 text-sm rounded-md border border-[#E5E0D5] bg-white focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/20" name="category" value={formData.category} onChange={handleChange}>
-                            <option value="Groceries">Groceries</option>
-                            <option value="Rent">Rent</option>
-                            <option value="Dining Out">Dining Out</option>
-                            <option value="Transport">Transport</option>
-                            <option value="Subscriptions">Subscriptions</option>
+
+                        // generate categories dynamically
+                        { categories.map(category => ( 
+                            <option value={category}>
+                                {category}
+                            </option>
+                        ))}
                         </select>
+                        
                     </div>
                 </div>
 

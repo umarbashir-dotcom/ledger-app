@@ -20,7 +20,7 @@ const HomePage = () => {
         if (!isAuthenticated) navigate("/login")
     }, [isAuthenticated])
 
-    return( <GlobalProvider>
+    return (<GlobalProvider>
         <Header />
 
         <main className="max-w-6xl mx-auto px-6 mt-8">
@@ -30,8 +30,12 @@ const HomePage = () => {
                     <Filters />
                 </section >
                 <section className="flex flex-col gap-6">
-                    <BudgetPanel />
-                    <Categories />
+                    <div className="overflow-visible lg:max-h-80 lg:overflow-y-auto">
+                        <BudgetPanel/>
+                    </div>
+                    <div className="overflow-visible lg:max-h-80 lg:overflow-y-auto">
+                        <Categories />
+                    </div>
                 </section>
             </div>
         </main>

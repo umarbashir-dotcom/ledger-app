@@ -10,6 +10,12 @@ const budgetSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    type:{
+        type: String,
+        required: true,
+        enum: [ "income", "expense"],
+        lowercase: true   // auto-lowercases before validation
+    },
     limit: {
         type: Number,
         required: true

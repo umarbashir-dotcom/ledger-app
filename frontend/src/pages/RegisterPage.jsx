@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState, useContext } from "react"
 import { toast } from "react-toastify"
 import { AuthContext } from "../context/AuthContext"
+import favicon from "../../public/favicon.svg"
 
 const RegisterPage = () => {
     console.log("register")
@@ -40,7 +41,8 @@ const RegisterPage = () => {
 
                 <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-md bg-[#FAF7F0] flex items-center justify-center">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="#1B2A4A" strokeWidth="1.5" /><path d="M8 9h8M8 13h8M8 17h5" stroke="#1B2A4A" strokeWidth="1.5" strokeLinecap="round" /></svg>
+                        {/* <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="#1B2A4A" strokeWidth="1.5" /><path d="M8 9h8M8 13h8M8 17h5" stroke="#1B2A4A" strokeWidth="1.5" strokeLinecap="round" /></svg> */}
+                        <img src={favicon} alt="" />
                     </div>
                     <span className="font-display text-xl font-semibold text-[#FAF7F0] tracking-tight">Ledger</span>
                 </div>
@@ -67,7 +69,9 @@ const RegisterPage = () => {
                     {/* <!-- Mobile-only logo --> */}
                     <div className="lg:hidden flex items-center gap-3 mb-8">
                         <div className="w-9 h-9 rounded-md bg-[#1B2A4A] flex items-center justify-center">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="#FAF7F0" strokeWidth="1.5" /><path d="M8 9h8M8 13h8M8 17h5" stroke="#FAF7F0" strokeWidth="1.5" strokeLinecap="round" /></svg>
+                            {/* <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="#FAF7F0" strokeWidth="1.5" /><path d="M8 9h8M8 13h8M8 17h5" stroke="#FAF7F0" strokeWidth="1.5" strokeLinecap="round" /></svg> */}
+                            <img src={favicon} alt="" />
+
                         </div>
                         <span className="font-display text-xl font-semibold tracking-tight">Ledger</span>
                     </div>

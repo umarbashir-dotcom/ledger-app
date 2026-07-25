@@ -5,14 +5,15 @@ import { GlobalContext } from '../context/GlobalState'
 
 
 const Filters = () => {
-    const { pagedTransactions, fetchPagedTransactions } = useContext(GlobalContext)
+    const { pagedTransactions, fetchPagedTransactions, budgets } = useContext(GlobalContext)
     const [currentPage, setCurrentPage] = useState(1)
+
+    const incomeCategories = [ "Salary","Freelancing","Business","Investment","Gift","Bonus", "Refund", "Other"]
 
     const [searchedText, setSearchedText] = useState("")
     const [filteredType, setFilteredType] = useState("")
     const [filteredCategory, setFilteredCategory] = useState("")
     const [descending, setDescending] = useState(false)
-    console.log("filters rendered")
 
     const limit = 5;
     // load paged transactions on initial render 
@@ -55,11 +56,23 @@ const Filters = () => {
                 </select>
                 <select className="text-sm rounded-md border border-[#E5E0D5] bg-[#FAF7F0] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/20" value={filteredCategory} onChange={(e) => setFilteredCategory(e.target.value)}>
                     <option value="">All categories</option>
-                    <option value="Groceries">Groceries</option>
-                    <option value="Subscriptions">Subscriptions</option>
-                    <option value="Dining Out">Dining Out</option>
-                    <option value="Rent">Rent</option>
-                    <option value="Transport">Transport</option>
+                    <optgroup label="Expense">
+                        // generate expense categories dynamically
+                        { budgets.map(budget => ( 
+                            <option key={budget._id} value={budget.category}>
+                                {budget.category}
+                            </option>
+                        ))}
+                    </optgroup>
+
+                    <optgroup label="Income">
+                         // generate income categories dynamically
+                        { incomeCategories.map(category => ( 
+                            <option key={category} value={category}>
+                                {category}
+                            </option>
+                        ))}
+                    </optgroup>
                 </select>
                 <button className="text-sm rounded-md border border-[#E5E0D5] px-3 py-2 hover:bg-[#EFEAE0] transition-colors flex items-center gap-1.5 text-[#1B2A4A]" onClick={() => setDescending(prev => !prev)}>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M7 12h10M11 18h2" strokeLinecap="round" /></svg>
