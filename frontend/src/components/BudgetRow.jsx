@@ -12,8 +12,12 @@ const BudgetRow = ({budget, handleChange}) => {
                 type="number"
                 min="0"
                 value={budget.limit}
-                onChange={(e) =>  handleChange(budget._id, Number(e.target.value))}
+                onChange={(e) =>  handleChange(
+                                              budget._id,
+                                              e.target.value === "" ? "" : Number(e.target.value)
+                                              )}
                 className="w-full pl-6 pr-3 py-2 text-sm font-mono rounded-md border border-[#E5E0D5] bg-white focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/20"
+                required
               />
             </div>
           </div>

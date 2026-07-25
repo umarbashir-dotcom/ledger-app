@@ -18,6 +18,7 @@ const budgetSchema = new mongoose.Schema({
     },
     limit: {
         type: Number,
+        default: 0,
         required: true
     },
     created_at: {

@@ -56,7 +56,7 @@ const updateBudget = async (req, res) => {
                         $set: {
                             category: budget.category,
                             type: budget.type,
-                            limit: budget.limit
+                            limit: budget.limit || 0
                         }
                     }
                 }

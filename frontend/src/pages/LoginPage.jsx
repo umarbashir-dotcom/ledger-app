@@ -3,7 +3,6 @@ import { useNavigate, Link } from "react-router-dom"
 import { toast } from "react-toastify"
 import { AuthContext } from "../context/AuthContext"
 import favicon from "../../public/favicon.svg"
-import Spinner from "../components/Spinner"
 
 const LoginPage = () => {
   const { login, isAuthenticated, token } = useContext(AuthContext)
