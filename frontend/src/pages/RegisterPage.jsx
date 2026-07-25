@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext"
 import favicon from "../../public/favicon.svg"
 
 const RegisterPage = () => {
-    console.log("register")
+    const { register } = useContext(AuthContext)
     const [formData, setFormData] = useState({
         name: "",
         username: "",
@@ -13,9 +13,9 @@ const RegisterPage = () => {
         password: "",
     })
 
+    const [ showPassword, setShowPassword ] = useState(false)
     const navigate = useNavigate()
 
-    const { register } = useContext(AuthContext)
 
     const handleChange = (e) => setFormData(prevState => {
         return { ...prevState, [e.target.name]: e.target.value }
@@ -127,14 +127,15 @@ const RegisterPage = () => {
                             <label className="text-xs font-medium text-[#8A8371] uppercase tracking-wide">Password</label>
                             <div className="relative mt-1.5">
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     name="password"
                                     placeholder="At least 8 characters"
                                     value={formData.password}
                                     onChange={handleChange}
                                     className="w-full px-3.5 py-2.5 pr-10 text-sm rounded-md border border-[#E5E0D5] bg-white focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]/20 focus:border-[#1B2A4A] placeholder:text-[#B5AD9A]"
                                 />
-                                <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8A8371] hover:text-[#1B2A4A]">
+                                <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8A8371] hover:text-[#1B2A4A]"
+                                onClick={() => setShowPassword(prev => !prev)}>
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" /><circle cx="12" cy="12" r="3" /></svg>
                                 </button>
                             </div>
