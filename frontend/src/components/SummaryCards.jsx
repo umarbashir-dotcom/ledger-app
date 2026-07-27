@@ -17,7 +17,8 @@ const SummaryCards = () => {
   const totalIncome = transactions
     .filter(transaction => transaction.type === "income")
     .reduce((acc, t) => acc + t.amount, 0)
-
+  console.log("total income: ", totalIncome)
+  
   // calculating total expenses
   const totalExpense = transactions
     .filter(transaction => transaction.type === "expense")

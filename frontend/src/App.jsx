@@ -1,4 +1,5 @@
-import { Route,
+import {
+  Route,
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider
@@ -9,21 +10,31 @@ import HomePage from "./pages/HomePage"
 import LoginPage from "./pages/LoginPage"
 import MainLayout from "./layouts/MainLayout"
 import { AuthProvider } from "./context/AuthContext"
+import ProtectedRoutes from "./routes/ProtectedRoutes"
+import PublicRoutes from "./routes/PublicRoutes"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<MainLayout />}>
-      <Route index element={<HomePage />}/>
-      <Route path="/register" element={<RegisterPage />}/>
-      <Route path="/login" element={<LoginPage />}/>
+      {/* Protected Routes */}
+      <Route path="/" element={<ProtectedRoutes />}>
+        <Route index element={<HomePage />} />
+      </Route>
+
+      {/* Public Routes */}
+      <Route path="/" element={<PublicRoutes />}>
+        <Route path="/login" element={<LoginPage />} />
+      </Route>
+      
+      <Route path="/register" element={<RegisterPage />} />
     </Route>
   )
 )
 
 const App = () => {
-  return <AuthProvider> 
-            <RouterProvider router={router} /> 
-        </AuthProvider>
+  return <AuthProvider>
+    <RouterProvider router={router} />
+  </AuthProvider>
 }
 
 export default App

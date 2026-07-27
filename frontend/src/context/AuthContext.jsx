@@ -4,8 +4,8 @@ import AuthReducer from "../reducers/AuthReducer"
 
 const initialState = {
     user: null,  // user's data if user is logged in - or  nul if user is logged out
-    isAuthenticated: localStorage.getItem("token") ? true : false,
-    token: "",
+    isAuthenticated: false,
+    token:  localStorage.getItem("token"),
     error: null,
     success: true,
     loading: true,
@@ -15,12 +15,16 @@ const AuthContext = createContext(initialState)
 
 const AuthProvider = ({children}) => {
     const [ state, dispatch ] = useReducer(AuthReducer, initialState)
+    
+    useEffect(()=> {
+        // get user
+        getMe()
+    },[])
 
     // login
     const login = async (loginData) => {
         try{
             const data = await authServices.login(loginData)
-            console.log(data)
             dispatch({
                 type: "LOGIN_USER",
                 payload: data
@@ -33,7 +37,7 @@ const AuthProvider = ({children}) => {
     }
 
     // logout
-    const logout = async () => {
+    const logout = () => {
         const data = authServices.logout()
 
         dispatch({
@@ -54,16 +58,23 @@ const AuthProvider = ({children}) => {
 
         return data
     }
-    // add transaction
-    // const setIsAuthenticatedAndToken = async (isAuthenticated, token) => {
-    //     const data = await authServices.setIsAuthenticatedAndToken(isAuthenticated, token)
 
-    //     dispatch({
-    //         type: "SET_AUTHENTICATION_AND_TOKEN",
-    //         payload: 
-    //     })
-    // }
-
+    const getMe = async () => {
+        try{
+            const data = await authServices.getMe()
+            dispatch({
+                type: "SET_ME",
+                payload: data
+            })  
+        }
+        catch(err) {
+            dispatch({
+            type: "LOGOUT_USER",
+            payload: authServices.logout()
+            })
+        }
+    }
+    
     return (<AuthContext.Provider value={{
         user: state.user,
         isAuthenticated: state.isAuthenticated,
@@ -71,7 +82,8 @@ const AuthProvider = ({children}) => {
         loading: state.loading,
         login,
         register,
-        logout
+        logout,
+        getMe
     }}>
         {children}
     </AuthContext.Provider>)

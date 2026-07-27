@@ -10,13 +10,23 @@ const AuthReducer = (state, action) => {
             return {
                 ...state,
                 ...action.payload,
-                loading:false,
             }
         case "REGISTER_USER":
             return {
                 ...state,
                 ...action.payload,
                 loading:false,
+            }
+        case "SET_ME":
+            return {
+                ...state,
+                ...action.payload,
+                loading: false
+            }
+        case "RESET":
+            return {
+                ...state,
+                ...action.payload
             }
         default:
             return {...state}

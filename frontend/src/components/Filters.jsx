@@ -5,7 +5,7 @@ import { GlobalContext } from '../context/GlobalState'
 
 
 const Filters = () => {
-    const { pagedTransactions, fetchPagedTransactions, budgets } = useContext(GlobalContext)
+    const { pagedTransactions, fetchPagedTransactions, budgets, loading } = useContext(GlobalContext)
     const [currentPage, setCurrentPage] = useState(1)
 
     const incomeCategories = [ "Salary","Freelancing","Business","Investment","Gift","Bonus", "Refund", "Other"]
@@ -21,7 +21,7 @@ const Filters = () => {
         fetchPagedTransactions(currentPage, limit)
     }, [currentPage])
 
-    if (pagedTransactions.length === 0) return <EmptyState />
+    if (pagedTransactions.length === 0 && !loading) return <EmptyState />
 
     let filteredTransactions = [...pagedTransactions]
 

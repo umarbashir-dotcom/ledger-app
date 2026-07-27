@@ -48,8 +48,6 @@ const GlobalProvider = ({children}) => {
                 type: "SET_ERROR",
                 payload: err.message
             }) 
-
-            throw err 
         }
     }
     

@@ -5,9 +5,8 @@ import { AuthContext } from "../context/AuthContext"
 import favicon from "../../public/favicon.svg"
 
 const LoginPage = () => {
-  const { login, isAuthenticated, token } = useContext(AuthContext)
+  const { login, isAuthenticated } = useContext(AuthContext)
   const [showPassword, setShowPassword] = useState(false)
-
   const [loading, setLoading] = useState(false)
 
   const [formData, setFormData] = useState({
@@ -17,12 +16,8 @@ const LoginPage = () => {
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    // check if user is already logged in
-    if (isAuthenticated) {
-      navigate("/")
-    }
-
+  useEffect(()=> {
+    if(isAuthenticated) navigate("/")
   }, [isAuthenticated])
 
   const handleChange = (e) => setFormData(prevState => {
@@ -34,20 +29,12 @@ const LoginPage = () => {
     e.preventDefault()
     setLoading(prev => !prev)
     try {
-      const data = await login(formData)
-      console.log(data)
-      localStorage.setItem("token", data.token)
-      // login successfull
-      if (data.isAuthenticated) {
-        navigate("/")
-      }
+      await login(formData)
     } catch (err) {
       toast.error(err.message)
     } finally {
       setLoading(prev => !prev)
     }
-
-
   }
 
   return (

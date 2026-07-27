@@ -9,8 +9,9 @@ const authServices = {
                 body: JSON.stringify(loginData)
             })
         const data = await res.json()
-        console.log(res.ok)
         if (!res.ok) throw new Error(data.error)
+        
+        localStorage.setItem("token", data.token)
         return data
     },
 
@@ -18,8 +19,10 @@ const authServices = {
         localStorage.removeItem("token")
         return {
             isAuthenticated: false,
-            token: "",
-            loading:true
+            token: null,
+            user: null,
+            loading: false,
+            // loading:true
         }
     },
 
@@ -35,6 +38,22 @@ const authServices = {
         const data = await res.json()
 
         if (!res.ok) throw new Error(data.error)
+
+        localStorage.setItem("token", data.token)
+        return data
+    },
+
+    getMe: async () => {
+        const res = await fetch(`${import.meta.env.VITE_USER_API}/me`,{
+            headers: {
+                authorization: "Bearer " + localStorage.getItem("token") || ""
+            }
+        })
+
+        const data = await res.json()
+        if(!res.ok) throw new Error(data.error)
+        
+        localStorage.setItem("token", data.token)
         return data
     }
 }

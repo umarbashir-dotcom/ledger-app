@@ -86,8 +86,20 @@ const loginUser = async (req, res, next) => {
     }
 }
 
+// @desc    Get user
+// @route   GET /api/v1/users/me
+// @access  Private
+const getMe = async (req, res, next) => {
+    res.status(200).json({
+        user: req.user,
+        isAuthenticated: true,
+        isSuccess: true,
+        token: generateToken(req.user.id),
+    })
+}
+
 const generateToken = (id) => {
     return jwt.sign({ id: id }, process.env.JWT_SECRET, { expiresIn: "1d" })
 }
 
-export { registerUser, loginUser }
+export { registerUser, loginUser, getMe }
