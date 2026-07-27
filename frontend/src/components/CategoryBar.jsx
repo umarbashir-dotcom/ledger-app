@@ -1,7 +1,7 @@
 import React from 'react'
 
 const CategoryBar = ({budget, totalExpensesAmount}) => {
-  let usagePercent = (Math.ceil(((budget.amount) / Math.max(1, totalExpensesAmount))) * 100).toFixed(0)
+  let usagePercent = Math.ceil((((budget.amount) / Math.max(1, totalExpensesAmount))) * 100).toFixed(0)
   
   return (
     <div className="flex items-center gap-3">
