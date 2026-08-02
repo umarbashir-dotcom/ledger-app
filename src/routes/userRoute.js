@@ -10,7 +10,6 @@ router.post("/register", registerUser)
 router.post("/login", loginUser)
 
 // authenticating user
-router.use(requireAuth)
-router.get("/me", getMe)
+router.get("/me", requireAuth, getMe)
 
 export default router

@@ -94,7 +94,6 @@ const getMe = async (req, res, next) => {
         user: req.user,
         isAuthenticated: true,
         isSuccess: true,
-        token: generateToken(req.user.id),
     })
 }
 
